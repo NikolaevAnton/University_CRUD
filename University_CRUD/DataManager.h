@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 #import "University.h"
+#import "Course.h"
 
 @interface DataManager : NSObject
 
@@ -16,15 +17,20 @@
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (readonly, strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
+
+
+
 - (void)saveContext;
 - (NSURL *)applicationDocumentsDirectory;
 
 + (DataManager *) sharedManager;
+- (void)oneUniversity;
 
 - (void)add10ItemContent;
 - (void)addStudentWithName:(NSString *)name LastName:(NSString *)lasrName Telefon:(NSString *)telefon Email:(NSString *)email;
+- (void)addCourseWithCourseName:(NSString *)courseName Subject:(NSString *)subject Sector:(NSString *)sector Teacher:(Teacher *)teacher;
 - (University *)addIniversity;
-- (void)oneUniversity;
+
 @property (strong, nonatomic) University *university;
 
 @end

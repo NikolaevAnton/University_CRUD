@@ -27,7 +27,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    //Инициализируем проперть класса DataManager - university, таким образом, чтобы при каждой загрузке приложения у нас был
+    //один универ со всем множеством студентов, курсов и преподавателей
     self.dataManager = [DataManager sharedManager];
     self.dataManager.university = [self.dataManager addIniversity];
     [self.dataManager oneUniversity];

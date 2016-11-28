@@ -9,6 +9,8 @@
 #import "DataManager.h"
 #import "Student.h"
 #import "University.h"
+#import "Course.h"
+#import "Teacher.h"
 
 static NSString* firstNames[] = {
     
@@ -78,43 +80,28 @@ static NSString* emails[] = {
     student.telefon = telefon;
     student.email = email;
     
-//    if (self.university) {
-//        [self.university addStudentsObject:student];
-//    } else {
-//        [self addIniversity];
-//        [self.university addStudentsObject:student];
-//    }
-    
-    
     [self.university addStudentsObject:student];
     
     [self.managedObjectContext save:nil];
     
 }
 
-- (Student *)addRandomStudent {
+
+- (void)addCourseWithCourseName:(NSString *)courseName Subject:(NSString *)subject Sector:(NSString *)sector Teacher:(Teacher *)teacher {
+    Course *course =
+    [NSEntityDescription insertNewObjectForEntityForName:@"Course" inManagedObjectContext:self.managedObjectContext];
+    course.courseName = courseName;
+    course.subject = subject;
+    course.sector = sector;
+    course.teacher = teacher;
     
-    Student *student =
-    [NSEntityDescription insertNewObjectForEntityForName:@"Student" inManagedObjectContext:self.managedObjectContext];
+    [self.university addCoursesObject:course];
     
-    NSString *name = firstNames[arc4random_uniform(50)];
-    NSString *lastName = lastNames[arc4random_uniform(50)];
-    NSInteger numer = arc4random_uniform(9999999) + 1000000;
-    NSString *telefon = [NSString stringWithFormat:@"%@%d",telefons[arc4random_uniform(3)],numer];
-    NSString *email = [NSString stringWithFormat:@"%@_%@%@",
-                       [name lowercaseString],[lastName lowercaseString],emails[arc4random_uniform(3)]];
-    
-    student.firstName = name;
-    student.lastName = lastName;
-    student.telefon = telefon;
-    student.email = email;
-    
-    //[self.university addStudentsObject:student];
-    [self addStudentWithName:name LastName:lastName Telefon:telefon Email:email];
-    
-    return student;
+    [self.managedObjectContext save:nil];
     
 }
+
+
 
 //Универ иницицализиру в AppDelegate
 - (University *)addIniversity {
@@ -124,6 +111,8 @@ static NSString* emails[] = {
     return university;
 }
 
+
+//Получаем все объекты сущностей
 - (NSArray *)allObjectUniversity {
     NSFetchRequest *request = [[NSFetchRequest alloc] init];
     NSEntityDescription *descriotion = [NSEntityDescription entityForName:@"University" inManagedObjectContext:self.managedObjectContext];
@@ -136,13 +125,18 @@ static NSString* emails[] = {
     return array;
 }
 
+
+//Не допускаем размножения объектов базы данных при перезагрузке приложения
+
 - (void)oneUniversity {
     NSArray *universities = [self allObjectUniversity];
     University *firstUniversity = [universities firstObject];
     for (int i = 1; i < [universities count]; i++) {
         University *currentUniversity = universities[i];
         NSSet *setStudents = currentUniversity.students;
+        NSSet *setCourses = currentUniversity.courses;
         [firstUniversity addStudents:setStudents];
+        [firstUniversity addCourses:setCourses];
         [self.managedObjectContext deleteObject:currentUniversity];
     }
     self.university = firstUniversity;
@@ -150,15 +144,8 @@ static NSString* emails[] = {
     
 }
 
-- (void)add10ItemContent {
-    
-    for (int i = 0; i < 10; i++) {
-        [self addRandomStudent];
-    }
-    
-    [self.managedObjectContext save:nil];
-    
-}
+
+
 
 
 #pragma mark - Core Data stack
@@ -231,6 +218,41 @@ static NSString* emails[] = {
             abort();
         }
     }
+}
+
+#pragma mark - Test methods
+- (Student *)addRandomStudent {
+    
+    Student *student =
+    [NSEntityDescription insertNewObjectForEntityForName:@"Student" inManagedObjectContext:self.managedObjectContext];
+    
+    NSString *name = firstNames[arc4random_uniform(50)];
+    NSString *lastName = lastNames[arc4random_uniform(50)];
+    NSInteger numer = arc4random_uniform(9999999) + 1000000;
+    NSString *telefon = [NSString stringWithFormat:@"%@%ld",telefons[arc4random_uniform(3)],numer];
+    NSString *email = [NSString stringWithFormat:@"%@_%@%@",
+                       [name lowercaseString],[lastName lowercaseString],emails[arc4random_uniform(3)]];
+    
+    student.firstName = name;
+    student.lastName = lastName;
+    student.telefon = telefon;
+    student.email = email;
+    
+    //[self.university addStudentsObject:student];
+    [self addStudentWithName:name LastName:lastName Telefon:telefon Email:email];
+    
+    return student;
+    
+}
+
+- (void)add10ItemContent {
+    
+    for (int i = 0; i < 10; i++) {
+        [self addRandomStudent];
+    }
+    
+    [self.managedObjectContext save:nil];
+    
 }
 
 @end

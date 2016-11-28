@@ -10,4 +10,12 @@
 
 @interface NewCourseViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *nameCourseTextField;
+@property (weak, nonatomic) IBOutlet UITextField *subjectTextField;
+@property (weak, nonatomic) IBOutlet UITextField *sectionTextField;
+
+@property (weak, nonatomic) IBOutlet UILabel *teacherLabel;
+
+- (IBAction)addCourseButton:(UIButton *)sender;
+
 @end
