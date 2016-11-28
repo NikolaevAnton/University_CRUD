@@ -30,7 +30,10 @@
 - (void)addStudentWithName:(NSString *)name LastName:(NSString *)lasrName Telefon:(NSString *)telefon Email:(NSString *)email;
 - (void)addCourseWithCourseName:(NSString *)courseName Subject:(NSString *)subject Sector:(NSString *)sector Teacher:(Teacher *)teacher;
 - (University *)addIniversity;
+- (void) printUniverInfo;
+- (void) deleteAllObjectsInDataBase;
 
 @property (strong, nonatomic) University *university;
+@property (assign, nonatomic) BOOL change;
 
 @end

@@ -7,23 +7,58 @@
 //
 
 #import "CoursesViewController.h"
+#import "University.h"
+#import "DataManager.h"
+#import "CourseCell.h"
+#import "StudentsForCourseCell.h"
+#import "Student.h"
+#import "NewLecturesStudentsCell.h"
+#import "ChangeStudentsForCourseViewController.h"
+#import "Course.h"
 
 @interface CoursesViewController ()
 
-@property (strong, nonatomic) NSArray *courses;
+@property (strong, nonatomic) NSArray<Course *> *courses;
+
+@property (strong, nonatomic) DataManager *dataManager;
+@property (strong, nonatomic) NSArray *sections;
+@property (strong, nonatomic) Course *course;
 
 @end
 
 @implementation CoursesViewController
 
+- (NSArray *)sections {
+    NSString* sectionsName[] = {
+        @"Course", @"Button", @"List"
+    };
+    NSMutableArray *arrSections = [[NSMutableArray alloc] init];
+    for (int i = 0; i < [self.courses count]; i++) {
+        [arrSections addObject:sectionsName[0]];
+        [arrSections addObject:sectionsName[1]];
+        [arrSections addObject:sectionsName[2]];
+    }
+    return arrSections;
+}
+
+
+- (NSArray *)allCourses {
+    University *university = self.dataManager.university;
+    NSSet *setCourses = university.courses;
+    return [setCourses allObjects];
+}
+
 - (void)viewDidLoad {
+    self.dataManager = [DataManager sharedManager];
+    self.courses = [self allCourses];
+    
+    [self.dataManager printUniverInfo];
+    
+    self.course = nil;
+    
+    
     [super viewDidLoad];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,74 +68,127 @@
 
 - (IBAction)cancelButton:(UIStoryboardSegue *)sender {
     NSLog(@"cancelButton CoursesViewController");
+    self.course = nil;
 }
 
 - (IBAction)editCanselButton:(UIStoryboardSegue *)sender {
     NSLog(@"editCanselButton CoursesViewController");
+    self.course = nil;
+    self.courses = [self allCourses];
+    [self.tableView reloadData];
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
+    return [self.courses count] * 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.courses count];
+    
+    NSArray *namesSections = [self sections];
+
+    if ([namesSections[section] isEqualToString:@"Course"]) {
+        return 1;
+    }
+    if ([namesSections[section] isEqualToString:@"Button"]) {
+        return 1;
+    }
+    if ([namesSections[section] isEqualToString:@"List"]) {
+        Course *currentCourse = [self.courses objectAtIndex:section/3];
+        NSSet *setStudents = currentCourse.students;
+        return [[setStudents allObjects] count];
+    }
+    
+    return 0;
 }
 
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:<#@"reuseIdentifier"#> forIndexPath:indexPath];
+    static NSString *identifierCourse = @"identifierCourse";
+    static NSString *identifierStudents = @"identifierStudents";
+    static NSString *identifierButton = @"identifierButton";
     
-    // Configure the cell...
+    Course *currentCourse = [self.courses objectAtIndex:indexPath.section/3];
+    NSArray *students = [currentCourse.students allObjects];
     
-    return cell;
+    
+    NSArray *namesSections = [self sections];
+    
+    if ([namesSections[indexPath.section] isEqualToString:@"Course"]) {
+        CourseCell *cellCourse = [tableView dequeueReusableCellWithIdentifier:identifierCourse
+                                                                 forIndexPath:indexPath];
+        
+        if (!cellCourse) {
+            cellCourse = [[CourseCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                           reuseIdentifier:identifierCourse];
+        }
+        
+        cellCourse.nameLabel.text = currentCourse.courseName;
+        cellCourse.subjectLabel.text = currentCourse.subject;
+        cellCourse.sectionLabel.text = currentCourse.sector;
+        
+        return cellCourse;
+    }
+    if ([namesSections[indexPath.section] isEqualToString:@"Button"]) {
+        NewLecturesStudentsCell *cellLectures = [tableView dequeueReusableCellWithIdentifier:identifierButton
+                                                                                forIndexPath:indexPath];
+        if (!cellLectures) {
+            cellLectures = [[NewLecturesStudentsCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                          reuseIdentifier:identifierButton];
+        }
+        return cellLectures;
+    }
+    if ([namesSections[indexPath.section] isEqualToString:@"List"]) {
+        StudentsForCourseCell *cellStudents = [tableView dequeueReusableCellWithIdentifier:identifierStudents
+                                                                              forIndexPath:indexPath];
+        if (!cellStudents) {
+            cellStudents = [[StudentsForCourseCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                        reuseIdentifier:identifierStudents];
+        }
+        
+        Student *student = [students objectAtIndex:indexPath.row];
+        
+        cellStudents.firstNameLabel.text = student.firstName;
+        cellStudents.lastNameLabel.text = student.lastName;
+        
+        
+        return cellStudents;
+    }
+    
+    return nil;
 }
-*/
 
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
 }
-*/
 
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+- (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if ((section + 1) % 2 != 0) {
+        return @"Курс";
+    } else {
+        return @"Студенты посещающие данный курс";
+    }
 }
-*/
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *namesSections = [self sections];
+    if ([namesSections[indexPath.section] isEqualToString:@"Button"]) {
+        self.course = [self.courses objectAtIndex:indexPath.section/3];
+    }
 }
-*/
 
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
 
-/*
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"changeStudent"]) {
+        UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
+        ChangeStudentsForCourseViewController *changeViewController = (ChangeStudentsForCourseViewController *)[[navigationController viewControllers] lastObject];
+        changeViewController.course = self.course;
+    }
 }
-*/
+
 
 @end

@@ -33,41 +33,6 @@
     
 }
 
-- (void) printUniverInfo {
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
-    NSEntityDescription *description = [NSEntityDescription entityForName:@"University" inManagedObjectContext:self.dataManager.managedObjectContext];
-    [request setEntity:description];
-    NSError *requestError = nil;
-    NSArray *arrayUniversity = [self.dataManager.managedObjectContext executeFetchRequest:request error:&requestError];
-    if (requestError) {
-        NSLog(@"%@", [requestError localizedDescription]);
-    }
-    for (University *university in arrayUniversity) {
-        if (university.students == nil) {
-            continue;
-        }
-        NSLog(@"set: %d hash: %d", university.students.count, university.hash);
-        for (Student *student in university.students) {
-            NSLog(@"%@ %@", student.firstName, student.lastName);
-        }
-    }
-
-}
-
-- (void) deleteAllObjectsInDataBase {
-        NSFetchRequest *request = [[NSFetchRequest alloc] init];
-        NSEntityDescription *description = [NSEntityDescription entityForName:@"Object" inManagedObjectContext:self.dataManager.managedObjectContext];
-        [request setEntity:description];
-        NSError *requestError = nil;
-        NSArray *arrayObject = [self.dataManager.managedObjectContext executeFetchRequest:request error:&requestError];
-        if (requestError) {
-            NSLog(@"%@", [requestError localizedDescription]);
-        }
-        for (id odject in arrayObject) {
-            [self.dataManager.managedObjectContext deleteObject:odject];
-        }
-        [self.dataManager.managedObjectContext save:nil];
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -84,19 +49,19 @@
     /*
      Задание для базы 10 рандомных студентов
      */
-    //[self.dataManager add10ItemContent];
-    //self.students = [self allStudents];
+//    [self.dataManager add10ItemContent];
+//    self.students = [self allStudents];
     
     /*
      Получение массива всех студентов из сета университета.
      */
     
-    //[self printUniverInfo];
+    //[self.dataManager printUniverInfo];
     
     /*
      Удаление всех объектов из базы
      */
-    //[self deleteAllObjectsInDataBase];
+    //[self.dataManager deleteAllObjectsInDataBase];
 
     
     

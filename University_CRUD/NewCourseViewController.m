@@ -8,6 +8,8 @@
 
 #import "NewCourseViewController.h"
 #import "DataManager.h"
+#import "Teacher.h"
+
 
 @interface NewCourseViewController () <UITextFieldDelegate>
 
@@ -16,6 +18,7 @@
 @end
 
 @implementation NewCourseViewController
+
 
 - (void)viewDidLoad {
     
@@ -75,5 +78,17 @@
 */
 
 - (IBAction)addCourseButton:(UIButton *)sender {
+    
+    NSString *course = self.nameCourseTextField.text;
+    NSString *subject = self.subjectTextField.text;
+    NSString *section = self.sectionTextField.text;
+    Teacher *teacher = nil;
+    
+    if ([course isEqualToString:@""] || [subject isEqualToString:@""] || [section isEqualToString:@""]) {
+        NSLog(@"не заполнены текстфилды!");
+    } else {
+        [self.dataManager addCourseWithCourseName:course Subject:subject Sector:section Teacher:teacher];
+    }
+    
 }
 @end

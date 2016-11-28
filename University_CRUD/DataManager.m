@@ -145,6 +145,51 @@ static NSString* emails[] = {
 }
 
 
+//Принтер всех объектов в базе данных
+
+- (void) printUniverInfo {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"University"
+                                                   inManagedObjectContext:self.managedObjectContext];
+    [request setEntity:description];
+    NSError *requestError = nil;
+    NSArray *arrayUniversity = [self.managedObjectContext executeFetchRequest:request error:&requestError];
+    if (requestError) {
+        NSLog(@"%@", [requestError localizedDescription]);
+    }
+    for (University *university in arrayUniversity) {
+        if (university.students == nil) {
+            continue;
+        }
+        NSLog(@"Count for set Students: %ld hash object University: %ld", university.students.count, university.hash);
+        for (Student *student in university.students) {
+            NSLog(@"firstName:%@ lastName:%@", student.firstName, student.lastName);
+        }
+        NSLog(@"Count for set Courses: %ld hash object University: %ld", university.courses.count, university.hash);
+        for (Course *course in university.courses) {
+            NSLog(@"courseName:%@ subject:%@", course.courseName, course.subject);
+        }
+
+    }
+}
+
+//очистка базы
+
+- (void) deleteAllObjectsInDataBase {
+    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    NSEntityDescription *description = [NSEntityDescription entityForName:@"Object"
+                                                   inManagedObjectContext:self.managedObjectContext];
+    [request setEntity:description];
+    NSError *requestError = nil;
+    NSArray *arrayObject = [self.managedObjectContext executeFetchRequest:request error:&requestError];
+    if (requestError) {
+        NSLog(@"%@", [requestError localizedDescription]);
+    }
+    for (id odject in arrayObject) {
+        [self.managedObjectContext deleteObject:odject];
+    }
+    [self.managedObjectContext save:nil];
+}
 
 
 
