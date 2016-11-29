@@ -11,6 +11,8 @@
 
 @interface ChangeStudentsForCourseViewController : UITableViewController
 
+- (IBAction)agreeButton:(UIButton *)sender;
+
 @property (strong, nonatomic) Course *course;
 
 @end

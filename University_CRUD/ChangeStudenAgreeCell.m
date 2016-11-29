@@ -1,22 +1,16 @@
 //
-//  ChangeStudentCellTableViewCell.m
+//  ChangeStudenAgreeCell.m
 //  University_CRUD
 //
-//  Created by Admin on 28.11.16.
+//  Created by Admin on 29.11.16.
 //  Copyright © 2016 Admin. All rights reserved.
 //
 
-#import "ChangeStudentCellTableViewCell.h"
+#import "ChangeStudenAgreeCell.h"
 
-@interface ChangeStudentCellTableViewCell()
-
-
-@end
-
-@implementation ChangeStudentCellTableViewCell
+@implementation ChangeStudenAgreeCell
 
 - (void)awakeFromNib {
-
     [super awakeFromNib];
     // Initialization code
 }
@@ -27,7 +21,4 @@
     // Configure the view for the selected state
 }
 
-- (IBAction)switchStudent:(UISwitch *)sender {
-    [self.delegateController changeForCell:self];
-}
 @end

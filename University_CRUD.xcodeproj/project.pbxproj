@@ -26,6 +26,7 @@
 		8432635C1DE6E8DA00D1F915 /* NewStudentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8432635B1DE6E8DA00D1F915 /* NewStudentViewController.m */; };
 		8432635F1DE6E8FB00D1F915 /* EditStudentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8432635E1DE6E8FB00D1F915 /* EditStudentViewController.m */; };
 		843263951DE759C200D1F915 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 843263941DE759C200D1F915 /* DataManager.m */; };
+		843298AC1DED667D007E2A7C /* ChangeStudenAgreeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 843298AB1DED667D007E2A7C /* ChangeStudenAgreeCell.m */; };
 		84352ACC1DEC3E8D00F40D92 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84352ACB1DEC3E8D00F40D92 /* CourseCell.m */; };
 		84352ACF1DEC3EA800F40D92 /* StudentsForCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84352ACE1DEC3EA800F40D92 /* StudentsForCourseCell.m */; };
 		84352AD21DEC649D00F40D92 /* NewLecturesStudentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84352AD11DEC649D00F40D92 /* NewLecturesStudentsCell.m */; };
@@ -77,6 +78,8 @@
 		8432635E1DE6E8FB00D1F915 /* EditStudentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditStudentViewController.m; sourceTree = "<group>"; };
 		843263931DE759C200D1F915 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		843263941DE759C200D1F915 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
+		843298AA1DED667D007E2A7C /* ChangeStudenAgreeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChangeStudenAgreeCell.h; sourceTree = "<group>"; };
+		843298AB1DED667D007E2A7C /* ChangeStudenAgreeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChangeStudenAgreeCell.m; sourceTree = "<group>"; };
 		84352ACA1DEC3E8D00F40D92 /* CourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseCell.h; sourceTree = "<group>"; };
 		84352ACB1DEC3E8D00F40D92 /* CourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseCell.m; sourceTree = "<group>"; };
 		84352ACD1DEC3EA800F40D92 /* StudentsForCourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentsForCourseCell.h; sourceTree = "<group>"; };
@@ -204,22 +207,10 @@
 		843263611DE7027800D1F915 /* CoursesControls */ = {
 			isa = PBXGroup;
 			children = (
-				8442B5931DE8A83A009DF67C /* CoursesViewController.h */,
-				8442B5941DE8A83A009DF67C /* CoursesViewController.m */,
-				842ED8D61DEAEE1800809419 /* NewCourseViewController.h */,
-				842ED8D71DEAEE1800809419 /* NewCourseViewController.m */,
-				842ED8DC1DEAEECA00809419 /* EditCourseViewController.h */,
-				842ED8DD1DEAEECA00809419 /* EditCourseViewController.m */,
-				84352ACA1DEC3E8D00F40D92 /* CourseCell.h */,
-				84352ACB1DEC3E8D00F40D92 /* CourseCell.m */,
-				84352ACD1DEC3EA800F40D92 /* StudentsForCourseCell.h */,
-				84352ACE1DEC3EA800F40D92 /* StudentsForCourseCell.m */,
-				84352AD01DEC649D00F40D92 /* NewLecturesStudentsCell.h */,
-				84352AD11DEC649D00F40D92 /* NewLecturesStudentsCell.m */,
-				84352AD31DEC728C00F40D92 /* ChangeStudentsForCourseViewController.h */,
-				84352AD41DEC728C00F40D92 /* ChangeStudentsForCourseViewController.m */,
-				84352AD61DEC72D500F40D92 /* ChangeStudentCellTableViewCell.h */,
-				84352AD71DEC72D500F40D92 /* ChangeStudentCellTableViewCell.m */,
+				843298B21DED7D3F007E2A7C /* ListCourse */,
+				843298AE1DED7A93007E2A7C /* NewStudentsForCourse */,
+				843298AD1DED7A57007E2A7C /* NewCourse */,
+				843298B01DED7C7F007E2A7C /* EditCourse */,
 			);
 			name = CoursesControls;
 			sourceTree = "<group>";
@@ -249,6 +240,68 @@
 				8442B5881DE8A6F0009DF67C /* Teacher.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		843298AD1DED7A57007E2A7C /* NewCourse */ = {
+			isa = PBXGroup;
+			children = (
+				842ED8D61DEAEE1800809419 /* NewCourseViewController.h */,
+				842ED8D71DEAEE1800809419 /* NewCourseViewController.m */,
+			);
+			name = NewCourse;
+			sourceTree = "<group>";
+		};
+		843298AE1DED7A93007E2A7C /* NewStudentsForCourse */ = {
+			isa = PBXGroup;
+			children = (
+				84352AD31DEC728C00F40D92 /* ChangeStudentsForCourseViewController.h */,
+				84352AD41DEC728C00F40D92 /* ChangeStudentsForCourseViewController.m */,
+				843298AF1DED7AF0007E2A7C /* CellForNewStudent */,
+			);
+			name = NewStudentsForCourse;
+			sourceTree = "<group>";
+		};
+		843298AF1DED7AF0007E2A7C /* CellForNewStudent */ = {
+			isa = PBXGroup;
+			children = (
+				84352AD61DEC72D500F40D92 /* ChangeStudentCellTableViewCell.h */,
+				84352AD71DEC72D500F40D92 /* ChangeStudentCellTableViewCell.m */,
+				843298AA1DED667D007E2A7C /* ChangeStudenAgreeCell.h */,
+				843298AB1DED667D007E2A7C /* ChangeStudenAgreeCell.m */,
+			);
+			name = CellForNewStudent;
+			sourceTree = "<group>";
+		};
+		843298B01DED7C7F007E2A7C /* EditCourse */ = {
+			isa = PBXGroup;
+			children = (
+				842ED8DC1DEAEECA00809419 /* EditCourseViewController.h */,
+				842ED8DD1DEAEECA00809419 /* EditCourseViewController.m */,
+			);
+			name = EditCourse;
+			sourceTree = "<group>";
+		};
+		843298B11DED7CED007E2A7C /* CellForCoursesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				84352ACA1DEC3E8D00F40D92 /* CourseCell.h */,
+				84352ACB1DEC3E8D00F40D92 /* CourseCell.m */,
+				84352ACD1DEC3EA800F40D92 /* StudentsForCourseCell.h */,
+				84352ACE1DEC3EA800F40D92 /* StudentsForCourseCell.m */,
+				84352AD01DEC649D00F40D92 /* NewLecturesStudentsCell.h */,
+				84352AD11DEC649D00F40D92 /* NewLecturesStudentsCell.m */,
+			);
+			name = CellForCoursesViewController;
+			sourceTree = "<group>";
+		};
+		843298B21DED7D3F007E2A7C /* ListCourse */ = {
+			isa = PBXGroup;
+			children = (
+				8442B5931DE8A83A009DF67C /* CoursesViewController.h */,
+				8442B5941DE8A83A009DF67C /* CoursesViewController.m */,
+				843298B11DED7CED007E2A7C /* CellForCoursesViewController */,
+			);
+			name = ListCourse;
 			sourceTree = "<group>";
 		};
 		84E5E1A91DEB180C000B8BFA /* TeachersControls */ = {
@@ -354,6 +407,7 @@
 				8442B58F1DE8A6F0009DF67C /* Object+CoreDataProperties.m in Sources */,
 				84352AD81DEC72D500F40D92 /* ChangeStudentCellTableViewCell.m in Sources */,
 				8442B5901DE8A6F0009DF67C /* Object.m in Sources */,
+				843298AC1DED667D007E2A7C /* ChangeStudenAgreeCell.m in Sources */,
 				8442B5921DE8A6F0009DF67C /* Teacher.m in Sources */,
 				8442B58B1DE8A6F0009DF67C /* University+CoreDataProperties.m in Sources */,
 				842ED8D81DEAEE1800809419 /* NewCourseViewController.m in Sources */,

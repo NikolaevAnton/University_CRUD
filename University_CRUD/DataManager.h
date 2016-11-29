@@ -34,6 +34,6 @@
 - (void) deleteAllObjectsInDataBase;
 
 @property (strong, nonatomic) University *university;
-@property (assign, nonatomic) BOOL change;
+
 
 @end

@@ -23,6 +23,7 @@
 @property (strong, nonatomic) DataManager *dataManager;
 @property (strong, nonatomic) NSArray *sections;
 @property (strong, nonatomic) Course *course;
+@property (strong, nonatomic) NewLecturesStudentsCell *cellLecture;
 
 @end
 
@@ -56,6 +57,7 @@
     
     self.course = nil;
     
+    self.buttonOutlet.enabled = NO;
     
     [super viewDidLoad];
     
@@ -67,14 +69,16 @@
 }
 
 - (IBAction)cancelButton:(UIStoryboardSegue *)sender {
-    NSLog(@"cancelButton CoursesViewController");
+    //NSLog(@"cancelButton CoursesViewController");
     self.course = nil;
+    self.cellLecture.buttonOutlet.enabled = NO;
 }
 
 - (IBAction)editCanselButton:(UIStoryboardSegue *)sender {
     NSLog(@"editCanselButton CoursesViewController");
     self.course = nil;
     self.courses = [self allCourses];
+    self.cellLecture.buttonOutlet.enabled = NO;
     [self.tableView reloadData];
 }
 
@@ -137,6 +141,9 @@
             cellLectures = [[NewLecturesStudentsCell alloc] initWithStyle:UITableViewCellStyleDefault
                                                           reuseIdentifier:identifierButton];
         }
+        
+        cellLectures.buttonOutlet.enabled = NO;
+        
         return cellLectures;
     }
     if ([namesSections[indexPath.section] isEqualToString:@"List"]) {
@@ -165,17 +172,29 @@
 }
 
 - (nullable NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if ((section + 1) % 2 != 0) {
+    
+    NSArray *namesSections = [self sections];
+    if ([namesSections[section] isEqualToString:@"Course"]) {
         return @"Курс";
-    } else {
+    } else if ([namesSections[section] isEqualToString:@"Button"]) {
         return @"Студенты посещающие данный курс";
     }
+    return @"";
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSArray *namesSections = [self sections];
+    NSLog(@"indexPath %ld %ld", indexPath.section, indexPath.row);
     if ([namesSections[indexPath.section] isEqualToString:@"Button"]) {
+        NSLog(@"Button");
         self.course = [self.courses objectAtIndex:indexPath.section/3];
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        if ([cell isKindOfClass:[NewLecturesStudentsCell class]]) {
+            NewLecturesStudentsCell *cell2 = (NewLecturesStudentsCell *)cell;
+            cell2.buttonOutlet.enabled = YES;
+            self.cellLecture = cell2;
+        }
     }
 }
 
@@ -186,6 +205,7 @@
     if ([segue.identifier isEqualToString:@"changeStudent"]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         ChangeStudentsForCourseViewController *changeViewController = (ChangeStudentsForCourseViewController *)[[navigationController viewControllers] lastObject];
+        NSLog(@"Course %@", self.course.courseName);
         changeViewController.course = self.course;
     }
 }

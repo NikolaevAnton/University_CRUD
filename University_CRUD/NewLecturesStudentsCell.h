@@ -10,4 +10,6 @@
 
 @interface NewLecturesStudentsCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UIButton *buttonOutlet;
+
 @end

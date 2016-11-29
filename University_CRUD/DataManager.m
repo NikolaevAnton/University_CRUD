@@ -168,6 +168,7 @@ static NSString* emails[] = {
         NSLog(@"Count for set Courses: %ld hash object University: %ld", university.courses.count, university.hash);
         for (Course *course in university.courses) {
             NSLog(@"courseName:%@ subject:%@", course.courseName, course.subject);
+            NSLog(@"students go to course - %ld", [course.students count]);
         }
 
     }

@@ -7,6 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ChangeStudentsForCourseViewController.h"
+
+
+
+@protocol ChangeStudentDelegate;
 
 @interface ChangeStudentCellTableViewCell : UITableViewCell
 
@@ -16,7 +21,15 @@
 
 @property (weak, nonatomic) IBOutlet UISwitch *studentSwitch;
 
+@property (weak, nonatomic) id <ChangeStudentDelegate> delegateController;
+
 - (IBAction)switchStudent:(UISwitch *)sender;
 
+@end
+
+@protocol ChangeStudentDelegate <NSObject>
+
+- (void)changeForCell:(ChangeStudentCellTableViewCell *) cell;
 
 @end
+

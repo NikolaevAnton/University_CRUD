@@ -10,6 +10,9 @@
 
 @interface CoursesViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *buttonOutlet;
+
+
 - (IBAction)cancelButton:(UIStoryboardSegue *)sender;
 - (IBAction)editCanselButton:(UIStoryboardSegue *)sender;
 
