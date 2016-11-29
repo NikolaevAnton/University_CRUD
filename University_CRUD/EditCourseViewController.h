@@ -7,7 +7,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Course.h"
 
 @interface EditCourseViewController : UITableViewController
+
+@property (weak, nonatomic) IBOutlet UILabel *nameCourseLabel;
+@property (weak, nonatomic) IBOutlet UILabel *subjectCourseLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sectionCourseLabel;
+@property (weak, nonatomic) IBOutlet UILabel *teacherCourseLabel;
+
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *subjectTextField;
+@property (weak, nonatomic) IBOutlet UITextField *sectionTextField;
+
+
+@property(strong, nonatomic) Course *course;
+- (IBAction)updateDBButton:(UIButton *)sender;
 
 @end

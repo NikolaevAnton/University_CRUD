@@ -15,6 +15,7 @@
 #import "NewLecturesStudentsCell.h"
 #import "ChangeStudentsForCourseViewController.h"
 #import "Course.h"
+#import "EditCourseViewController.h"
 
 @interface CoursesViewController ()
 
@@ -59,6 +60,8 @@
     
     self.buttonOutlet.enabled = NO;
     
+    self.editOutlet.enabled = NO;
+    
     [super viewDidLoad];
     
 }
@@ -72,6 +75,7 @@
     //NSLog(@"cancelButton CoursesViewController");
     self.course = nil;
     self.cellLecture.buttonOutlet.enabled = NO;
+    self.editOutlet.enabled = NO;
 }
 
 - (IBAction)editCanselButton:(UIStoryboardSegue *)sender {
@@ -79,6 +83,7 @@
     self.course = nil;
     self.courses = [self allCourses];
     self.cellLecture.buttonOutlet.enabled = NO;
+    self.editOutlet.enabled = NO;
     [self.tableView reloadData];
 }
 
@@ -196,6 +201,12 @@
             self.cellLecture = cell2;
         }
     }
+    
+    if ([namesSections[indexPath.section] isEqualToString:@"Course"]) {
+        self.editOutlet.enabled = YES;
+        self.course = [self.courses objectAtIndex:indexPath.section/3];
+    }
+    
 }
 
 
@@ -205,9 +216,16 @@
     if ([segue.identifier isEqualToString:@"changeStudent"]) {
         UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
         ChangeStudentsForCourseViewController *changeViewController = (ChangeStudentsForCourseViewController *)[[navigationController viewControllers] lastObject];
-        NSLog(@"Course %@", self.course.courseName);
+        //NSLog(@"Course %@", self.course.courseName);
         changeViewController.course = self.course;
     }
+    
+    if ([segue.identifier isEqualToString:@"editIndentifier"]) {
+        UINavigationController *navigationController = (UINavigationController *)segue.destinationViewController;
+        EditCourseViewController *editCourseController = (EditCourseViewController *)[[navigationController viewControllers] lastObject];
+        editCourseController.course = self.course;
+    }
+    
 }
 
 

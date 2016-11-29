@@ -12,6 +12,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *buttonOutlet;
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editOutlet;
 
 - (IBAction)cancelButton:(UIStoryboardSegue *)sender;
 - (IBAction)editCanselButton:(UIStoryboardSegue *)sender;
