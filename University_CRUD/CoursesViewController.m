@@ -17,7 +17,7 @@
 #import "Course.h"
 #import "EditCourseViewController.h"
 
-@interface CoursesViewController ()
+@interface CoursesViewController () <UITabBarControllerDelegate>
 
 @property (strong, nonatomic) NSArray<Course *> *courses;
 
@@ -50,6 +50,10 @@
     return [setCourses allObjects];
 }
 
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    [self.tableView reloadData];
+}
+
 - (void)viewDidLoad {
     self.dataManager = [DataManager sharedManager];
     self.courses = [self allCourses];
@@ -60,13 +64,15 @@
     
     self.editOutlet.enabled = NO;
     
+    UITabBarController *tabBarController = (UITabBarController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    [tabBarController setDelegate:self];
+    
     [super viewDidLoad];
     
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (IBAction)cancelButton:(UIStoryboardSegue *)sender {
@@ -77,7 +83,7 @@
 }
 
 - (IBAction)editCanselButton:(UIStoryboardSegue *)sender {
-    NSLog(@"editCanselButton CoursesViewController");
+    //NSLog(@"editCanselButton CoursesViewController");
     self.course = nil;
     self.courses = [self allCourses];
     self.cellLecture.buttonOutlet.enabled = NO;

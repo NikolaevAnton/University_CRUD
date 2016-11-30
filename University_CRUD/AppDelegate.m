@@ -33,6 +33,8 @@
     self.dataManager.university = [self.dataManager addIniversity];
     [self.dataManager oneUniversity];
     
+    //[self.dataManager add10ItemContent];
+    
     return YES;
 }
 

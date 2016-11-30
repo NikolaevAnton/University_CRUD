@@ -19,4 +19,7 @@
 
 - (IBAction)enterTeacherButton:(UIButton *)sender;
 
+- (IBAction)deleteTeacherButton:(UIButton *)sender;
+
+
 @end

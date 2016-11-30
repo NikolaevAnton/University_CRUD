@@ -25,6 +25,10 @@
 @property(strong, nonatomic) Course *course;
 - (IBAction)updateDBButton:(UIButton *)sender;
 
+- (IBAction)deleteCourseButton:(UIButton *)sender;
+
+
+
 - (IBAction)cancelButtonChangeTeacher:(UIStoryboardSegue *)sender;
 - (IBAction)editCanselButtonChangeTeacher:(UIStoryboardSegue *)sender;
 

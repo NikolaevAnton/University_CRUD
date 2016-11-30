@@ -83,6 +83,11 @@
     
 }
 
+- (IBAction)deleteCourseButton:(UIButton *)sender {
+    [self.dataManager.managedObjectContext deleteObject:self.course];
+    [self.dataManager.managedObjectContext save:nil];
+}
+
 
 - (IBAction)cancelButtonChangeTeacher:(UIStoryboardSegue *)sender {
     NSLog(@"cancelButtonChangeTeacher");

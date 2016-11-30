@@ -10,11 +10,13 @@
 #import "DataManager.h"
 #import "TeacherCell.h"
 #import "Teacher.h"
+#import "TeacherCoursesCell.h"
 
 @interface TeachersViewController ()
 
 @property (strong, nonatomic) DataManager *dataManager;
 @property (strong, nonatomic) NSArray *teachers;
+
 
 @end
 
@@ -64,31 +66,62 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
     return [self.teachers count];
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    Teacher *teacher = [self.teachers objectAtIndex:section];
+    NSArray *arrayCourses = [teacher.courses allObjects];
+    if (arrayCourses.count == 0) {
+        return 1;
+    } else {
+        return 2;
+    }
+}
+
+- (NSString *)stringCourses:(NSArray<Course *> *)arrayCourses {
+    NSMutableString *resultString = [[NSMutableString alloc] init];
+    
+    for(Course *course in arrayCourses) {
+        NSString *stringCourse = [NSString stringWithFormat:@"%@, ",course.courseName];
+        [resultString appendString:stringCourse];
+    }
+    [resultString deleteCharactersInRange:NSMakeRange([resultString length] - 1, 1)];
+    [resultString deleteCharactersInRange:NSMakeRange([resultString length] - 1, 1)];
+    [resultString appendString:@"."];
+    return resultString;
+}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *identifier = @"teacherCell";
+    static NSString *identifierCourse = @"teacherCoursesCell";
     
-    TeacherCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    Teacher *teacher = [self.teachers objectAtIndex:indexPath.section];
+    NSArray *arrayCourses = [teacher.courses allObjects];
     
-    if (!cell) {
-        cell = [[TeacherCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+    if (indexPath.row == 0) {
+        TeacherCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+        
+        if (!cell) {
+            cell = [[TeacherCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        }
+        
+        cell.firstNameLabel.text = teacher.firstName;
+        cell.lastNameLabel.text = teacher.lastName;
+        
+        return cell;
+    } else {
+        TeacherCoursesCell *cell = [tableView dequeueReusableCellWithIdentifier:identifierCourse forIndexPath:indexPath];
+        
+        if (!cell) {
+            cell = [[TeacherCoursesCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifierCourse];
+        }
+        
+        cell.cousesLabel.text = [self stringCourses:arrayCourses];
+        
+        return cell;
     }
-    
-    Teacher *teacher = [self.teachers objectAtIndex:indexPath.row];
-    
-    cell.firstNameLabel.text = teacher.firstName;
-    cell.lastNameLabel.text = teacher.lastName;
-    
-    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

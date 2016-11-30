@@ -50,6 +50,11 @@
     [self.dataManager.managedObjectContext save:nil];
 }
 
+- (IBAction)deleteTeacherButton:(UIButton *)sender {
+    [self.dataManager.managedObjectContext deleteObject:self.dataManager.currentTeacher];
+    [self.dataManager.managedObjectContext save:nil];
+}
+
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
