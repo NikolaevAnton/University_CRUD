@@ -72,6 +72,8 @@ static NSString* emails[] = {
     return manager;
 }
 
+//Методы добавления студента, курса и преподователя в базу данных и настройка их связи с объектом университета
+
 - (void)addStudentWithName:(NSString *)name LastName:(NSString *)lasrName Telefon:(NSString *)telefon Email:(NSString *)email {
     Student *student =
     [NSEntityDescription insertNewObjectForEntityForName:@"Student" inManagedObjectContext:self.managedObjectContext];
@@ -99,6 +101,17 @@ static NSString* emails[] = {
     
     [self.managedObjectContext save:nil];
     
+}
+
+- (void)addTeacherWithName:(NSString *)firstName LastName:(NSString *)lastName {
+    Teacher *teacher =
+    [NSEntityDescription insertNewObjectForEntityForName:@"Teacher" inManagedObjectContext:self.managedObjectContext];
+    teacher.firstName = firstName;
+    teacher.lastName = lastName;
+    
+    [self.university addTeachersObject:teacher];
+    
+    [self.managedObjectContext save:nil];
 }
 
 
@@ -135,8 +148,10 @@ static NSString* emails[] = {
         University *currentUniversity = universities[i];
         NSSet *setStudents = currentUniversity.students;
         NSSet *setCourses = currentUniversity.courses;
+        NSSet *setTeachers = currentUniversity.teachers;
         [firstUniversity addStudents:setStudents];
         [firstUniversity addCourses:setCourses];
+        [firstUniversity addTeachers:setTeachers];
         [self.managedObjectContext deleteObject:currentUniversity];
     }
     self.university = firstUniversity;
@@ -169,6 +184,11 @@ static NSString* emails[] = {
         for (Course *course in university.courses) {
             NSLog(@"courseName:%@ subject:%@", course.courseName, course.subject);
             NSLog(@"students go to course - %ld", [course.students count]);
+        }
+        NSLog(@"Count for set Teachers %ld hash object University: %ld", university.teachers.count, university.hash);
+        for (Teacher *teacher in university.courses) {
+            NSLog(@"teacher: %@ %@", teacher.firstName, teacher.lastName);
+            //NSLog(@"course - %ld", )
         }
 
     }

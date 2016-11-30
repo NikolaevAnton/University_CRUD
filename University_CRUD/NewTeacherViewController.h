@@ -10,4 +10,10 @@
 
 @interface NewTeacherViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UITextField *nameTeacherTextField;
+
+@property (weak, nonatomic) IBOutlet UITextField *lastNameTeacherTextField;
+
+- (IBAction)addTeacherButton:(UIButton *)sender;
+
 @end

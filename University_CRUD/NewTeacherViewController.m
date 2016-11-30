@@ -7,21 +7,24 @@
 //
 
 #import "NewTeacherViewController.h"
+#import "DataManager.h"
 
-@interface NewTeacherViewController ()
+@interface NewTeacherViewController () <UITextFieldDelegate>
+
+@property (strong, nonatomic) DataManager *dataManager;
 
 @end
 
 @implementation NewTeacherViewController
 
 - (void)viewDidLoad {
+    
+    self.nameTeacherTextField.delegate = self;
+    self.lastNameTeacherTextField.delegate = self;
+    
+    self.dataManager = [DataManager sharedManager];
+    
     [super viewDidLoad];
-    
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -29,15 +32,43 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UITableViewDelegate
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.section == 0) {
+        switch (indexPath.row) {
+            case 0:
+                [self.nameTeacherTextField becomeFirstResponder];
+                break;
+            case 1:
+                [self.lastNameTeacherTextField becomeFirstResponder];
+            default:
+                break;
+        }
+    }
 }
-*/
 
+#pragma mark - UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self.nameTeacherTextField resignFirstResponder];
+    [self.lastNameTeacherTextField resignFirstResponder];
+    return YES;
+}
+
+
+
+- (IBAction)addTeacherButton:(UIButton *)sender {
+    
+    NSString *name = self.nameTeacherTextField.text;
+    NSString *lastName = self.lastNameTeacherTextField.text;
+    
+    if ([name isEqualToString:@""] || [lastName isEqualToString:@""]) {
+        NSLog(@"");
+    } else {
+        
+    }
+    
+}
 @end
