@@ -10,4 +10,13 @@
 
 @interface EditTeacherViewController : UITableViewController
 
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *lastNameLabel;
+
+@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *lastNameTextField;
+
+- (IBAction)enterTeacherButton:(UIButton *)sender;
+
 @end
