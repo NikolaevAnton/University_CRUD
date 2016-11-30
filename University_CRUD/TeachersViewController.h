@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface TeachersViewController : UITableViewController
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *editOutlet;
 
 - (IBAction)cancelButton:(UIStoryboardSegue *)sender;
 - (IBAction)editCanselButton:(UIStoryboardSegue *)sender;

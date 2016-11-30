@@ -23,14 +23,19 @@
     self.nameCourseLabel.text = self.course.courseName;
     self.subjectCourseLabel.text = self.course.subject;
     self.sectionCourseLabel.text = self.course.sector;
+    
     self.teacherCourseLabel.text = [NSString stringWithFormat:@"%@ %@",
                                     self.course.teacher.firstName, self.course.teacher.lastName];
+    self.nameTeacherLabel.text = [NSString stringWithFormat:@"%@ %@",
+                                  self.course.teacher.firstName, self.course.teacher.lastName];
     
     self.nameTextField.delegate = self;
     self.subjectTextField.delegate = self;
     self.sectionTextField.delegate = self;
     
     self.dataManager = [DataManager sharedManager];
+    
+    self.dataManager.currentTeacher = nil;
     
     [super viewDidLoad];
 }
@@ -70,7 +75,22 @@
         self.course.sector = self.sectionTextField.text;
     }
     
+    if (![self.dataManager.currentTeacher isEqual:nil]) {
+        self.course.teacher = self.dataManager.currentTeacher;
+    }
+    
     [self.dataManager.managedObjectContext save:nil];
+    
+}
+
+
+- (IBAction)cancelButtonChangeTeacher:(UIStoryboardSegue *)sender {
+    NSLog(@"cancelButtonChangeTeacher");
+}
+- (IBAction)editCanselButtonChangeTeacher:(UIStoryboardSegue *)sender {
+    
+    self.nameTeacherLabel.text = [NSString stringWithFormat:@"%@ %@",
+                                  self.dataManager.currentTeacher.firstName, self.dataManager.currentTeacher.lastName];
     
 }
 

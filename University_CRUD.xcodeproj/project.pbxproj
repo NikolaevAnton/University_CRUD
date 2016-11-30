@@ -34,6 +34,8 @@
 		8433C5AF1DEEC5DE00D4B4F7 /* Teacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433C5AB1DEEC5DE00D4B4F7 /* Teacher.m */; };
 		8433C5B21DEED44F00D4B4F7 /* TeachersForCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433C5B11DEED44F00D4B4F7 /* TeachersForCourseCell.m */; };
 		8433C5B51DEED53000D4B4F7 /* TeachersForCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433C5B41DEED53000D4B4F7 /* TeachersForCourseViewController.m */; };
+		8433C5B81DEEEAC700D4B4F7 /* EditTeacherForCourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433C5B71DEEEAC700D4B4F7 /* EditTeacherForCourseViewController.m */; };
+		8433C5BB1DEEEAED00D4B4F7 /* EditTeacherForCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 8433C5BA1DEEEAED00D4B4F7 /* EditTeacherForCourseCell.m */; };
 		84352ACC1DEC3E8D00F40D92 /* CourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84352ACB1DEC3E8D00F40D92 /* CourseCell.m */; };
 		84352ACF1DEC3EA800F40D92 /* StudentsForCourseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84352ACE1DEC3EA800F40D92 /* StudentsForCourseCell.m */; };
 		84352AD21DEC649D00F40D92 /* NewLecturesStudentsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 84352AD11DEC649D00F40D92 /* NewLecturesStudentsCell.m */; };
@@ -97,6 +99,10 @@
 		8433C5B11DEED44F00D4B4F7 /* TeachersForCourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachersForCourseCell.m; sourceTree = "<group>"; };
 		8433C5B31DEED53000D4B4F7 /* TeachersForCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeachersForCourseViewController.h; sourceTree = "<group>"; };
 		8433C5B41DEED53000D4B4F7 /* TeachersForCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeachersForCourseViewController.m; sourceTree = "<group>"; };
+		8433C5B61DEEEAC700D4B4F7 /* EditTeacherForCourseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTeacherForCourseViewController.h; sourceTree = "<group>"; };
+		8433C5B71DEEEAC700D4B4F7 /* EditTeacherForCourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTeacherForCourseViewController.m; sourceTree = "<group>"; };
+		8433C5B91DEEEAED00D4B4F7 /* EditTeacherForCourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditTeacherForCourseCell.h; sourceTree = "<group>"; };
+		8433C5BA1DEEEAED00D4B4F7 /* EditTeacherForCourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditTeacherForCourseCell.m; sourceTree = "<group>"; };
 		84352ACA1DEC3E8D00F40D92 /* CourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseCell.h; sourceTree = "<group>"; };
 		84352ACB1DEC3E8D00F40D92 /* CourseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseCell.m; sourceTree = "<group>"; };
 		84352ACD1DEC3EA800F40D92 /* StudentsForCourseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StudentsForCourseCell.h; sourceTree = "<group>"; };
@@ -288,6 +294,10 @@
 			children = (
 				842ED8DC1DEAEECA00809419 /* EditCourseViewController.h */,
 				842ED8DD1DEAEECA00809419 /* EditCourseViewController.m */,
+				8433C5B61DEEEAC700D4B4F7 /* EditTeacherForCourseViewController.h */,
+				8433C5B71DEEEAC700D4B4F7 /* EditTeacherForCourseViewController.m */,
+				8433C5B91DEEEAED00D4B4F7 /* EditTeacherForCourseCell.h */,
+				8433C5BA1DEEEAED00D4B4F7 /* EditTeacherForCourseCell.m */,
 			);
 			name = EditCourse;
 			sourceTree = "<group>";
@@ -432,7 +442,9 @@
 				84352AD81DEC72D500F40D92 /* ChangeStudentCellTableViewCell.m in Sources */,
 				8433C5B51DEED53000D4B4F7 /* TeachersForCourseViewController.m in Sources */,
 				8442B5901DE8A6F0009DF67C /* Object.m in Sources */,
+				8433C5BB1DEEEAED00D4B4F7 /* EditTeacherForCourseCell.m in Sources */,
 				843298AC1DED667D007E2A7C /* ChangeStudenAgreeCell.m in Sources */,
+				8433C5B81DEEEAC700D4B4F7 /* EditTeacherForCourseViewController.m in Sources */,
 				8442B58B1DE8A6F0009DF67C /* University+CoreDataProperties.m in Sources */,
 				842ED8D81DEAEE1800809419 /* NewCourseViewController.m in Sources */,
 				843263311DE6D4C300D1F915 /* main.m in Sources */,

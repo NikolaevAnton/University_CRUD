@@ -20,8 +20,12 @@
 @property (weak, nonatomic) IBOutlet UITextField *subjectTextField;
 @property (weak, nonatomic) IBOutlet UITextField *sectionTextField;
 
+@property (weak, nonatomic) IBOutlet UILabel *nameTeacherLabel;
 
 @property(strong, nonatomic) Course *course;
 - (IBAction)updateDBButton:(UIButton *)sender;
+
+- (IBAction)cancelButtonChangeTeacher:(UIStoryboardSegue *)sender;
+- (IBAction)editCanselButtonChangeTeacher:(UIStoryboardSegue *)sender;
 
 @end
