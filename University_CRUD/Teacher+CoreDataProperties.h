@@ -2,7 +2,7 @@
 //  Teacher+CoreDataProperties.h
 //  University_CRUD
 //
-//  Created by Admin on 25.11.16.
+//  Created by Admin on 30.11.16.
 //  Copyright © 2016 Admin. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -17,8 +17,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSString *firstName;
 @property (nullable, nonatomic, retain) NSString *lastName;
-@property (nullable, nonatomic, retain) Course *course;
+@property (nullable, nonatomic, retain) NSSet<Course *> *courses;
 @property (nullable, nonatomic, retain) University *university;
+
+@end
+
+@interface Teacher (CoreDataGeneratedAccessors)
+
+- (void)addCoursesObject:(Course *)value;
+- (void)removeCoursesObject:(Course *)value;
+- (void)addCourses:(NSSet<Course *> *)values;
+- (void)removeCourses:(NSSet<Course *> *)values;
 
 @end
 

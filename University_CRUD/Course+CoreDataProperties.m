@@ -2,7 +2,7 @@
 //  Course+CoreDataProperties.m
 //  University_CRUD
 //
-//  Created by Admin on 25.11.16.
+//  Created by Admin on 30.11.16.
 //  Copyright © 2016 Admin. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -14,10 +14,10 @@
 @implementation Course (CoreDataProperties)
 
 @dynamic courseName;
-@dynamic subject;
 @dynamic sector;
-@dynamic teacher;
+@dynamic subject;
 @dynamic students;
+@dynamic teacher;
 @dynamic university;
 
 @end

@@ -54,8 +54,6 @@
     self.dataManager = [DataManager sharedManager];
     self.courses = [self allCourses];
     
-    [self.dataManager printUniverInfo];
-    
     self.course = nil;
     
     self.buttonOutlet.enabled = NO;
@@ -136,6 +134,8 @@
         cellCourse.nameLabel.text = currentCourse.courseName;
         cellCourse.subjectLabel.text = currentCourse.subject;
         cellCourse.sectionLabel.text = currentCourse.sector;
+        cellCourse.teacherLabel.text = [NSString stringWithFormat:@"%@ %@",
+                                        currentCourse.teacher.firstName, currentCourse.teacher.lastName];
         
         return cellCourse;
     }

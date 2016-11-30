@@ -67,7 +67,7 @@
     if ([name isEqualToString:@""] || [lastName isEqualToString:@""]) {
         NSLog(@"");
     } else {
-        
+        [self.dataManager addTeacherWithName:name LastName:lastName];
     }
     
 }

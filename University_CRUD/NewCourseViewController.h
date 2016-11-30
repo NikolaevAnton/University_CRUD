@@ -18,4 +18,7 @@
 
 - (IBAction)addCourseButton:(UIButton *)sender;
 
+- (IBAction)cancelButtonNewTeacher:(UIStoryboardSegue *)sender;
+- (IBAction)editCanselButtonNewTeacher:(UIStoryboardSegue *)sender;
+
 @end

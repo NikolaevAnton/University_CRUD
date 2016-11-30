@@ -52,6 +52,14 @@
     }
 }
 
+- (IBAction)enterTeacher:(UIStoryboardSegue *)sender {
+    NSLog(@"enterTeacher");
+}
+
+- (IBAction)canselTeacher:(UIStoryboardSegue *)sender {
+    NSLog(@"canselTeacher");
+}
+
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

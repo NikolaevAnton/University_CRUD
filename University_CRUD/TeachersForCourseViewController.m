@@ -1,24 +1,24 @@
 //
-//  TeachersViewController.m
+//  TeachersForCourseViewController.m
 //  University_CRUD
 //
-//  Created by Admin on 27.11.16.
+//  Created by Admin on 30.11.16.
 //  Copyright © 2016 Admin. All rights reserved.
 //
 
-#import "TeachersViewController.h"
+#import "TeachersForCourseViewController.h"
+#import "TeachersForCourseCell.h"
 #import "DataManager.h"
-#import "TeacherCell.h"
 #import "Teacher.h"
 
-@interface TeachersViewController ()
+@interface TeachersForCourseViewController ()
 
 @property (strong, nonatomic) DataManager *dataManager;
 @property (strong, nonatomic) NSArray *teachers;
 
 @end
 
-@implementation TeachersViewController
+@implementation TeachersForCourseViewController
 
 - (NSArray *)getAllTeachers {
     University *university = self.dataManager.university;
@@ -27,9 +27,10 @@
 }
 
 - (void)viewDidLoad {
-    
     self.dataManager = [DataManager sharedManager];
     self.teachers = [self getAllTeachers];
+    
+    self.addOutlet.enabled = NO;
     
     [super viewDidLoad];
 }
@@ -39,50 +40,44 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (IBAction)cancelButton:(UIStoryboardSegue *)sender {
-    NSLog(@"cancelButton TeachersViewController");
-}
-- (IBAction)editCanselButton:(UIStoryboardSegue *)sender {
-    NSLog(@"editCanselButton TeachersViewController");
-    self.teachers = [self getAllTeachers];
-    [self.tableView reloadData];
-    
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    self.addOutlet.enabled = YES;
+    self.dataManager.currentTeacher = [self.teachers objectAtIndex:indexPath.row];
 }
 
 #pragma mark - Table view data source
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 60;
-}
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
     return [self.teachers count];
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *identifier = @"teacherCell";
+    static NSString *identifier = @"teachersForCourseCell";
     
-    TeacherCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
+    TeachersForCourseCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier forIndexPath:indexPath];
     
     if (!cell) {
-        cell = [[TeacherCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
+        cell = [[TeachersForCourseCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:identifier];
     }
     
     Teacher *teacher = [self.teachers objectAtIndex:indexPath.row];
     
-    cell.firstNameLabel.text = teacher.firstName;
+    cell.nameLabel.text = teacher.firstName;
     cell.lastNameLabel.text = teacher.lastName;
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
 }
 
 

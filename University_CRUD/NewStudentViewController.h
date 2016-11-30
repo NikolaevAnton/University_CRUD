@@ -20,5 +20,7 @@
 
 - (IBAction)enterNewStudentButton:(UIButton *)sender;
 
+- (IBAction)enterTeacher:(UIStoryboardSegue *)sender;
+- (IBAction)canselTeacher:(UIStoryboardSegue *)sender;
 
 @end

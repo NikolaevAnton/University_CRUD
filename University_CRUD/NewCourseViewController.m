@@ -82,7 +82,7 @@
     NSString *course = self.nameCourseTextField.text;
     NSString *subject = self.subjectTextField.text;
     NSString *section = self.sectionTextField.text;
-    Teacher *teacher = nil;
+    Teacher *teacher = self.dataManager.currentTeacher;
     
     if ([course isEqualToString:@""] || [subject isEqualToString:@""] || [section isEqualToString:@""]) {
         NSLog(@"не заполнены текстфилды!");
@@ -91,4 +91,15 @@
     }
     
 }
+
+- (IBAction)cancelButtonNewTeacher:(UIStoryboardSegue *)sender {
+    //NSLog(@"cancelButtonNewTeacher");
+    self.dataManager.currentTeacher = nil;
+}
+- (IBAction)editCanselButtonNewTeacher:(UIStoryboardSegue *)sender {
+    //NSLog(@"editCanselButtonNewTeacher");
+    self.teacherLabel.text = [NSString stringWithFormat:@"%@ %@",
+                              self.dataManager.currentTeacher.firstName, self.dataManager.currentTeacher.lastName];
+}
+
 @end

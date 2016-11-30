@@ -10,6 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "University.h"
 #import "Course.h"
+#import "Teacher.h"
 
 @interface DataManager : NSObject
 
@@ -29,11 +30,13 @@
 - (void)add10ItemContent;
 - (void)addStudentWithName:(NSString *)name LastName:(NSString *)lasrName Telefon:(NSString *)telefon Email:(NSString *)email;
 - (void)addCourseWithCourseName:(NSString *)courseName Subject:(NSString *)subject Sector:(NSString *)sector Teacher:(Teacher *)teacher;
+- (void)addTeacherWithName:(NSString *)firstName LastName:(NSString *)lastName;
+
 - (University *)addIniversity;
 - (void) printUniverInfo;
 - (void) deleteAllObjectsInDataBase;
 
 @property (strong, nonatomic) University *university;
-
+@property (strong, nonatomic) Teacher *currentTeacher;
 
 @end
